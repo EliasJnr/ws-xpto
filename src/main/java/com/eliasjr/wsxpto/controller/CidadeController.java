@@ -90,7 +90,7 @@ public class CidadeController {
 	}
 
 	@ApiOperation(value = "Retorna dois estados, um com mais cidades e o outro com menos cidades.")
-	@RequestMapping(value = "/most-less-state", method = RequestMethod.GET)
+	@RequestMapping(value = "/mais-menos-estados", method = RequestMethod.GET)
 	public List<Estado> getStateWithMostAndLessCities() {
 		return service.retornaEstadoComMaioriaEMenosCidades();
 	}
@@ -119,8 +119,8 @@ public class CidadeController {
 	}
 
 	@ApiOperation(value = "Pesquisar")
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public List<Cidade> search(@ApiParam(value = "City", required = true) Cidade city) {
+	@RequestMapping(value = "/pesquisar", method = RequestMethod.GET)
+	public List<Cidade> search(@ApiParam(value = "Cidade", required = true) Cidade city) {
 		return (service.search(Example.of(city)));
 	}
 
