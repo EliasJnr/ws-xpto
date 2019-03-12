@@ -8,7 +8,7 @@ import com.eliasjr.wsxpto.domain.City;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
     @Query(

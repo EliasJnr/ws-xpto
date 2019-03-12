@@ -77,6 +77,15 @@ public class City {
 	public void setIbgeId(Long ibgeId) {
 		this.ibgeId = ibgeId;
 	}
+	
+
+	public String getAlternativeNames() {
+		return alternativeNames;
+	}
+
+	public void setAlternativeNames(String alternativeNames) {
+		this.alternativeNames = alternativeNames;
+	}
 
 	public String getUf() {
 		return uf;

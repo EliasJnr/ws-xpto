@@ -21,6 +21,14 @@ public class CsvCity {
 		this.ibge_id = ibge_id;
 	}
 
+	public String getAlternative_names() {
+		return alternative_names;
+	}
+
+	public void setAlternative_names(String alternative_names) {
+		this.alternative_names = alternative_names;
+	}
+
 	public String getUf() {
 		return uf;
 	}
