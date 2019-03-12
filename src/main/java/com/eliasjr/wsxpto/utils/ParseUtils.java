@@ -1,8 +1,8 @@
 package com.eliasjr.wsxpto.utils;
 
 import com.google.common.collect.ImmutableList;
-import com.eliasjr.wsxpto.domain.CsvCity;
-import com.eliasjr.wsxpto.domain.City;
+import com.eliasjr.wsxpto.domain.CsvCidade;
+import com.eliasjr.wsxpto.domain.Cidade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ public class ParseUtils {
 	private ParseUtils() {
 	}
 
-	public static List<City> parseListCsvCityToListCity(List<CsvCity> cities) {
-		List<City> cityList = new ArrayList<>(ImmutableList.of());
+	public static List<Cidade> parseListCsvCityToListCity(List<CsvCidade> cities) {
+		List<Cidade> cityList = new ArrayList<>(ImmutableList.of());
 		cities.forEach(city -> {
-			City newCity = new City();
+			Cidade newCity = new Cidade();
 			newCity.setName(city.getName());
 			newCity.setCapital(city.isCapital());
 			newCity.setMicroregion(city.getMicroregion());

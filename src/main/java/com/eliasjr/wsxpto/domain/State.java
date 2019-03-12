@@ -2,7 +2,7 @@ package com.eliasjr.wsxpto.domain;
 
 public class State {
 	private String uf;
-	private int cityCount;
+	private int cidadeCount;
 	
 	public String getUf() {
 		return uf;
@@ -11,10 +11,10 @@ public class State {
 		this.uf = uf;
 	}
 	public int getCityCount() {
-		return cityCount;
+		return cidadeCount;
 	}
-	public void setCityCount(int cityCount) {
-		this.cityCount = cityCount;
+	public void setCityCount(int cidadeCount) {
+		this.cidadeCount = cidadeCount;
 	}
 	
 	
