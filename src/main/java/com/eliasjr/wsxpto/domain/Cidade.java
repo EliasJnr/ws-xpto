@@ -50,15 +50,6 @@ public class Cidade {
 	@Column(name = "lon")
 	private Float longitude;
 
-	@Column(name = "created_at")
-	@CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date createdAt;
-
-	@Column(name = "updated_at")
-	@LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date updatedAt;
 
 	public Long getId() {
 		return id;
@@ -148,20 +139,5 @@ public class Cidade {
 		this.longitude = longitude;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
 
 }
