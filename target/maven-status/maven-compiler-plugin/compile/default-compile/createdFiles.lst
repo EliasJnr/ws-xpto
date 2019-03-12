@@ -1,0 +1,5 @@
+com/eliasjr/wsxpto/domain/City.class
+com/eliasjr/wsxpto/WsXptoApplication.class
+com/eliasjr/wsxpto/web/SwaggerConfig.class
+com/eliasjr/wsxpto/controller/CityController.class
+com/eliasjr/wsxpto/ServletInitializer.class
