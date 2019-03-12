@@ -1,7 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.eliasjr.wsxpto.WsXptoApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.3 s <<< FAILURE! - in com.eliasjr.wsxpto.WsXptoApplicationTests
-initializationError(com.eliasjr.wsxpto.WsXptoApplicationTests)  Time elapsed: 0.008 s  <<< ERROR!
-java.lang.IllegalStateException: Found multiple @SpringBootConfiguration annotated classes [Generic bean: class [com.eliasjr.wsxpto.ServletInitializer]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/home/eliasjr/Documents/workspace-sts-3.9.7.RELEASE/back/ws-xpto/target/classes/com/eliasjr/wsxpto/ServletInitializer.class], Generic bean: class [com.eliasjr.wsxpto.WsXptoApplication]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/home/eliasjr/Documents/workspace-sts-3.9.7.RELEASE/back/ws-xpto/target/classes/com/eliasjr/wsxpto/WsXptoApplication.class]]
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.074 s - in com.eliasjr.wsxpto.WsXptoApplicationTests

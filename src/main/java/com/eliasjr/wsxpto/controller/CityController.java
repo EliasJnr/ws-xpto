@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.eliasjr.wsxpto.service.impl.CityService;
-import com.eliasjr.wsxpto.domain.State;
 import com.eliasjr.wsxpto.domain.City;
+import com.eliasjr.wsxpto.domain.State;
+import com.eliasjr.wsxpto.service.impl.CityService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,10 +26,10 @@ import io.swagger.annotations.ApiParam;
 
 @Api(value = "City controller", description = "Controller de cidades")
 @RestController
-@RequestMapping(value = "/city")
+@RequestMapping(value = "/api/city")
 public class CityController {
 
-	private CityService service;
+	private final CityService service;
 
 	@Autowired
 	public CityController(CityService service) {

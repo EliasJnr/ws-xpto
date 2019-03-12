@@ -14,12 +14,11 @@ import javax.persistence.TemporalType;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-@Entity
-@Table(name = "CITY")
+@Entity(name = "CITY")
 public class City {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "ibge_id", nullable = false, length = 128)
@@ -77,7 +76,6 @@ public class City {
 	public void setIbgeId(Long ibgeId) {
 		this.ibgeId = ibgeId;
 	}
-	
 
 	public String getAlternativeNames() {
 		return alternativeNames;
