@@ -12,4 +12,4 @@ Executar:
 - Executar o comando Maven "mvn spring-boot:run" na raíz do projeto BACK
 
 Acesso a API da aplicação através do Swagger
-http://localhost:8080/swagger-ui.html
+-  http://localhost:8080/swagger-ui.html
