@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.eliasjr.wsxpto.domain.Cidade;
 import com.eliasjr.wsxpto.domain.CsvCidade;
 import com.eliasjr.wsxpto.domain.Estado;
+import com.eliasjr.wsxpto.exception.InvalidColumnNameException;
 import com.eliasjr.wsxpto.repository.CidadeRepository;
 import com.eliasjr.wsxpto.service.ICidadeService;
 import com.eliasjr.wsxpto.utils.CidadeUtils;
@@ -112,50 +113,40 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 
 	@Override
 	public int countByColumnName(String name) {
-		// String attribute = RELATION_CSV_ENTITY.get(name);
-		// if (attribute == null) {
-		// throw new InvalidColumnNameException("Coluna inválida: " + name);
-		// }
-		int obj = 0;
-		switch (name) {
-		case "name":
-			obj = repository.countByColumnName();
-			break;
-		case "ibge_id":
-			obj = repository.countByColumnIbgeId();
-			break;
-		case "uf":
-			obj = repository.countByColumnUF();
-			break;
-		case "capital":
-			obj = repository.countByColumnCapital();
-			break;
-		case "lon":
-			obj = repository.countByColumnLon();
-			break;
-		case "lat":
-			obj = repository.countByColumnLat();
-			break;
-		case "no_accents":
-			obj = repository.countByColumnNoAccent();
-			break;
-		case "alternative_names":
-			obj = repository.countByColumnAlternativeNames();
-			break;
-		case "microregion":
-			obj = repository.countByColumnMicroRegion();
-			break;
-		case "mesoregion":
-			obj = repository.countByColumnMesoRegion();
-			break;
-		default:
-			break;
+		String attribute = CsvUtils.RELATION_CSV_ENTITY.get(name);
+		if (attribute == null) {
+			throw new InvalidColumnNameException("Coluna inválida: " + name);
 		}
+
+		int obj = 0;
+
+		if (name.equalsIgnoreCase("name")) {
+			obj = repository.countByColumnName();
+		} else if (name.equalsIgnoreCase("ibge_id")) {
+			obj = repository.countByColumnIbgeId();
+		} else if (name.equalsIgnoreCase("uf")) {
+			obj = repository.countByColumnUF();
+		} else if (name.equalsIgnoreCase("capital")) {
+			obj = repository.countByColumnCapital();
+		} else if (name.equalsIgnoreCase("lon")) {
+			obj = repository.countByColumnLon();
+		} else if (name.equalsIgnoreCase("lat")) {
+			obj = repository.countByColumnLat();
+		} else if (name.equalsIgnoreCase("no_accents")) {
+			obj = repository.countByColumnNoAccent();
+		} else if (name.equalsIgnoreCase("alternative_names")) {
+			obj = repository.countByColumnAlternativeNames();
+		} else if (name.equalsIgnoreCase("microregion")) {
+			obj = repository.countByColumnMicroRegion();
+		} else if (name.equalsIgnoreCase("mesoregion")) {
+			obj = repository.countByColumnMesoRegion();
+		}
+
 		return obj;
 	}
 
 	@Override
-	public List<Cidade> getTheTwoFarthestCities() {
+	public List<Cidade> carregaDuasCidadesMaisDistantes() {
 		List<Cidade> cities = this.getAll();
 		Cidade city1 = new Cidade();
 		Cidade city2 = new Cidade();

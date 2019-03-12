@@ -20,5 +20,5 @@ public interface ICidadeService extends IGenericService<Cidade, Long> {
     List<String> getCitiesNameByUF(Example<Cidade> example);
     int countAllCities();
     int countByColumnName(String name);
-    List<Cidade> getTheTwoFarthestCities();
+    List<Cidade> carregaDuasCidadesMaisDistantes();
 }

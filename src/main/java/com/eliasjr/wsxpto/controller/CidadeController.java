@@ -148,7 +148,7 @@ public class CidadeController {
 	@ApiOperation(value = "Retorna as duas cidades mais distantes no db")
 	@RequestMapping(value = "/maisDistante", method = RequestMethod.GET)
 	public List<Cidade> getTheTwoFarthestCities() {
-		return service.getTheTwoFarthestCities();
+		return service.carregaDuasCidadesMaisDistantes();
 	}
 
 }
