@@ -1,15 +1,15 @@
 com\eliasjr\wsxpto\service\IGenericService.class
+com\eliasjr\wsxpto\domain\Estado.class
 com\eliasjr\wsxpto\interceptor\LoggerInterceptor.class
 com\eliasjr\wsxpto\web\SwaggerConfig.class
 com\eliasjr\wsxpto\controller\CidadeController.class
 com\eliasjr\wsxpto\repository\CidadeRepository.class
 com\eliasjr\wsxpto\domain\CsvCidade.class
+com\eliasjr\wsxpto\utils\CidadeUtils.class
 com\eliasjr\wsxpto\service\impl\GenericService.class
 com\eliasjr\wsxpto\service\impl\CidadeService.class
-com\eliasjr\wsxpto\utils\CityUtils.class
 com\eliasjr\wsxpto\service\ICidadeService.class
 com\eliasjr\wsxpto\web\WebConfig.class
-com\eliasjr\wsxpto\domain\State.class
 com\eliasjr\wsxpto\WsXptoApplication.class
 com\eliasjr\wsxpto\exception\EntityInvalidException.class
 com\eliasjr\wsxpto\utils\ParseUtils.class

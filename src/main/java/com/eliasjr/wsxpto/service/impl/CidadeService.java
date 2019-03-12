@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import com.eliasjr.wsxpto.domain.Cidade;
 import com.eliasjr.wsxpto.domain.CsvCidade;
-import com.eliasjr.wsxpto.domain.State;
+import com.eliasjr.wsxpto.domain.Estado;
 import com.eliasjr.wsxpto.repository.CidadeRepository;
 import com.eliasjr.wsxpto.service.ICidadeService;
-import com.eliasjr.wsxpto.utils.CityUtils;
+import com.eliasjr.wsxpto.utils.CidadeUtils;
 import com.eliasjr.wsxpto.utils.CsvUtils;
 import com.eliasjr.wsxpto.utils.ParseUtils;
 
@@ -32,14 +32,14 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 	private CidadeRepository repository;
 
 	@Override
-	public List<Cidade> loadCitiesFromCsv(InputStream initialStream) throws IOException {
+	public List<Cidade> carregarCidadesCsv(InputStream initialStream) throws IOException {
 		List<CsvCidade> citiesToSave = CsvUtils.read(CsvCidade.class, initialStream);
 		List<Cidade> cities = ParseUtils.parseListCsvCityToListCity(citiesToSave);
 		return repository.saveAll(cities);
 	}
 
 	@Override
-	public List<Cidade> getAllCapitalsOrderedByName() {
+	public List<Cidade> carregarCapitaisPorNome() {
 		Cidade city = new Cidade();
 		city.setCapital(true);
 		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withIgnoreNullValues()
@@ -50,26 +50,26 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 	}
 
 	@Override
-	public List<State> getStateWithMostAndLessCities() {
-		List<State> states = this.getStateWithCityCount();
-		State mostCitiesState = Collections.max(states, Comparator.comparingInt(State::getCityCount));
-		State lessCitiesState = Collections.min(states, Comparator.comparingInt(State::getCityCount));
-		List<State> mostCitiesStateList = states.stream()
+	public List<Estado> retornaEstadoComMaioriaEMenosCidades() {
+		List<Estado> states = this.carregaEstadoComQuantidadeCidade();
+		Estado mostCitiesState = Collections.max(states, Comparator.comparingInt(Estado::getCityCount));
+		Estado lessCitiesState = Collections.min(states, Comparator.comparingInt(Estado::getCityCount));
+		List<Estado> mostCitiesStateList = states.stream()
 				.filter(state -> state.getCityCount() == mostCitiesState.getCityCount()).collect(Collectors.toList());
-		List<State> lessCitiesStateList = states.stream()
+		List<Estado> lessCitiesStateList = states.stream()
 				.filter(state -> state.getCityCount() == lessCitiesState.getCityCount()).collect(Collectors.toList());
-		List<State> response = new ArrayList<>(mostCitiesStateList);
+		List<Estado> response = new ArrayList<>(mostCitiesStateList);
 		response.addAll(lessCitiesStateList);
 		return response;
 	}
 
 	@Override
-	public List<State> getStateWithCityCount() {
+	public List<Estado> carregaEstadoComQuantidadeCidade() {
 		List<Object> ufListCountingCities = repository.getUFListCountingCities();
-		ArrayList<State> states = new ArrayList<>();
+		ArrayList<Estado> states = new ArrayList<>();
 		for (Object item : ufListCountingCities) {
 			Object[] item1 = (Object[]) item;
-			State state = new State();
+			Estado state = new Estado();
 			state.setUf(String.valueOf(item1[0]));
 			state.setCityCount(Integer.parseInt(String.valueOf(item1[1])));
 			states.add(state);
@@ -169,7 +169,7 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 					float[] cityData2 = new float[2];
 					Arrays.fill(cityData2, cities.get(j).getLatitude());
 					Arrays.fill(cityData2, cities.get(j).getLongitude());
-					double newMaxDistance = Math.max(CityUtils.getDistance(cityData1, cityData2), maxDistance);
+					double newMaxDistance = Math.max(CidadeUtils.getDistance(cityData1, cityData2), maxDistance);
 					if (newMaxDistance > maxDistance) {
 						city1 = cities.get(i);
 						city2 = cities.get(j);

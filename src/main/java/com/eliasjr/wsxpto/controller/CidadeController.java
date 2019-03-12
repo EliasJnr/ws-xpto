@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eliasjr.wsxpto.domain.Cidade;
-import com.eliasjr.wsxpto.domain.State;
+import com.eliasjr.wsxpto.domain.Estado;
 import com.eliasjr.wsxpto.service.impl.CidadeService;
 
 import io.swagger.annotations.Api;
@@ -44,8 +44,8 @@ public class CidadeController {
 
 	@ApiOperation(value = "Criar nova cidade")
 	@RequestMapping(method = RequestMethod.POST)
-	public Cidade create(@ApiParam(value = "City", required = true) @RequestBody Cidade city) {
-		return (service.add(city));
+	public Cidade create(@ApiParam(value = "Cidade", required = true) @RequestBody Cidade cidade) {
+		return (service.add(cidade));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -56,9 +56,9 @@ public class CidadeController {
 
 	@ApiOperation(value = "Atualizar cidade")
 	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-	public Cidade update(@ApiParam(value = "City", required = true) @RequestBody @Valid Cidade city,
+	public Cidade update(@ApiParam(value = "City", required = true) @RequestBody @Valid Cidade cidade,
 			@ApiParam(value = "Id", required = true, example = "0", defaultValue = "0") @PathVariable() Long id) {
-		return (service.update(id, city));
+		return (service.update(id, cidade));
 	}
 
 	@ApiOperation(value = "Excluir cidade por ID")
@@ -72,7 +72,7 @@ public class CidadeController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "text/csv")
 	public List<Cidade> uploadSimple(@ApiParam(value = "Csv input stream", required = true) @RequestBody InputStream body)
 			throws IOException {
-		return service.loadCitiesFromCsv(body);
+		return service.carregarCidadesCsv(body);
 	}
 
 	@ApiOperation(value = "Importar csv do formulário html")
@@ -80,25 +80,25 @@ public class CidadeController {
 	public List<Cidade> uploadMultipart(
 			@ApiParam(value = "Form data", required = true) @RequestParam("file") MultipartFile file)
 			throws IOException {
-		return service.loadCitiesFromCsv(file.getInputStream());
+		return service.carregarCidadesCsv(file.getInputStream());
 	}
 
 	@ApiOperation(value = "Retorna capitais")
-	@RequestMapping(value = "/capitals", method = RequestMethod.GET)
+	@RequestMapping(value = "/capitais", method = RequestMethod.GET)
 	public List<Cidade> getCapitals() {
-		return service.getAllCapitalsOrderedByName();
+		return service.carregarCapitaisPorNome();
 	}
 
 	@ApiOperation(value = "Retorna dois estados, um com mais cidades e o outro com menos cidades.")
 	@RequestMapping(value = "/most-less-state", method = RequestMethod.GET)
-	public List<State> getStateWithMostAndLessCities() {
-		return service.getStateWithMostAndLessCities();
+	public List<Estado> getStateWithMostAndLessCities() {
+		return service.retornaEstadoComMaioriaEMenosCidades();
 	}
 
 	@ApiOperation(value = "Retorna todos os estados")
-	@RequestMapping(value = "/states", method = RequestMethod.GET)
-	public List<State> getStateWithCityCount() {
-		return service.getStateWithCityCount();
+	@RequestMapping(value = "/estados", method = RequestMethod.GET)
+	public List<Estado> getStateWithCityCount() {
+		return service.carregaEstadoComQuantidadeCidade();
 	}
 
 	@RequestMapping(value = "/ibge/{ibgeId}", method = RequestMethod.GET)
@@ -141,12 +141,12 @@ public class CidadeController {
 	@RequestMapping(value = "/count/{column}", method = RequestMethod.GET)
 	@ApiOperation(value = "Número de registros de uma determinada coluna")
 	public int countByColumnName(
-			@ApiParam(value = "column", required = true, example = "name") @PathVariable String column) {
-		return service.countByColumnName(column);
+			@ApiParam(value = "coluna", required = true, example = "name") @PathVariable String coluna) {
+		return service.countByColumnName(coluna);
 	}
 
 	@ApiOperation(value = "Retorna as duas cidades mais distantes no db")
-	@RequestMapping(value = "/farthest", method = RequestMethod.GET)
+	@RequestMapping(value = "/maisDistante", method = RequestMethod.GET)
 	public List<Cidade> getTheTwoFarthestCities() {
 		return service.getTheTwoFarthestCities();
 	}
