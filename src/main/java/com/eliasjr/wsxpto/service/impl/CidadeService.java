@@ -3,7 +3,6 @@ package com.eliasjr.wsxpto.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eliasjr.wsxpto.domain.Cidade;
 import com.eliasjr.wsxpto.domain.CsvCidade;
@@ -22,11 +22,11 @@ import com.eliasjr.wsxpto.domain.Estado;
 import com.eliasjr.wsxpto.exception.InvalidColumnNameException;
 import com.eliasjr.wsxpto.repository.CidadeRepository;
 import com.eliasjr.wsxpto.service.ICidadeService;
-import com.eliasjr.wsxpto.utils.CidadeUtils;
 import com.eliasjr.wsxpto.utils.CsvUtils;
 import com.eliasjr.wsxpto.utils.ParseUtils;
 
-@Service
+@Service("cidadeService")
+@Transactional
 public class CidadeService extends GenericService<Cidade, Long> implements ICidadeService {
 
 	@Autowired
@@ -113,6 +113,16 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 
 	@Override
 	public int countByColumnName(String name) {
+		return this.getQuantidadeByColumnName(name);
+	}
+
+	@Override
+	public List<Cidade> carregaDuasCidadesMaisDistantes() {
+		// https://developers.google.com/maps/documentation/geocoding/intro
+		return this.getAll();
+	}
+	
+	private int getQuantidadeByColumnName(String name) {
 		String attribute = CsvUtils.RELATION_CSV_ENTITY.get(name);
 		if (attribute == null) {
 			throw new InvalidColumnNameException("Coluna inválida: " + name);
@@ -143,34 +153,6 @@ public class CidadeService extends GenericService<Cidade, Long> implements ICida
 		}
 
 		return obj;
-	}
-
-	@Override
-	public List<Cidade> carregaDuasCidadesMaisDistantes() {
-		List<Cidade> cities = this.getAll();
-		Cidade city1 = new Cidade();
-		Cidade city2 = new Cidade();
-		double maxDistance = 0;
-		if (cities.size() > 1) {
-			for (int i = 0; i < cities.size() - 1; i++) {
-				for (int j = i + 1; j < cities.size(); j++) {
-					float[] cityData1 = new float[2];
-					Arrays.fill(cityData1, cities.get(i).getLatitude());
-					Arrays.fill(cityData1, cities.get(i).getLongitude());
-					float[] cityData2 = new float[2];
-					Arrays.fill(cityData2, cities.get(j).getLatitude());
-					Arrays.fill(cityData2, cities.get(j).getLongitude());
-					double newMaxDistance = Math.max(CidadeUtils.getDistance(cityData1, cityData2), maxDistance);
-					if (newMaxDistance > maxDistance) {
-						city1 = cities.get(i);
-						city2 = cities.get(j);
-						maxDistance = newMaxDistance;
-					}
-				}
-			}
-			return Arrays.asList(city1, city2);
-		}
-		return Collections.emptyList();
 	}
 
 }

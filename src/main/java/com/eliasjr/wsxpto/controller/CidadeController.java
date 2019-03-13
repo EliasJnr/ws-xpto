@@ -50,7 +50,8 @@ public class CidadeController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ApiOperation(value = "Cidade por Id")
-	public Cidade get(@ApiParam(value = "Id", required = true, example = "0", defaultValue = "0") @PathVariable Long id) {
+	public Cidade get(
+			@ApiParam(value = "Id", required = true, example = "0", defaultValue = "0") @PathVariable Long id) {
 		return (service.get(id));
 	}
 
@@ -70,8 +71,8 @@ public class CidadeController {
 
 	@ApiOperation(value = "Importação csv")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "text/csv")
-	public List<Cidade> uploadSimple(@ApiParam(value = "Csv input stream", required = true) @RequestBody InputStream body)
-			throws IOException {
+	public List<Cidade> uploadSimple(
+			@ApiParam(value = "Csv input stream", required = true) @RequestBody InputStream body) throws IOException {
 		return service.carregarCidadesCsv(body);
 	}
 
@@ -139,10 +140,10 @@ public class CidadeController {
 	}
 
 	@RequestMapping(value = "/count/{column}", method = RequestMethod.GET)
-	@ApiOperation(value = "Número de registros de uma determinada coluna")
+	@ApiOperation(value = "Número de registro de uma determinada coluna")
 	public int countByColumnName(
-			@ApiParam(value = "coluna", required = true, example = "name") @PathVariable String coluna) {
-		return service.countByColumnName(coluna);
+			@ApiParam(value = "column", required = true, example = "name") @PathVariable String column) {
+		return service.countByColumnName(column);
 	}
 
 	@ApiOperation(value = "Retorna as duas cidades mais distantes no db")
